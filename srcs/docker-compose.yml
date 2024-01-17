@@ -1,0 +1,11 @@
+version: "2"
+
+  services:
+  nginx:
+    image:  name #nom de l'image dockerhub ? On peut aussi build a la place de image.
+    ports:
+      - 5000:80 #mapping de ports
+    links:
+      - link #to link with
+
+  mariadb:
