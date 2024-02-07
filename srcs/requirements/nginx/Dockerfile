@@ -1,21 +1,21 @@
-FROM    debian:bookworm
+FROM debian:bookworm
 
-RUN  apt update
-RUN  apt install
-RUN  apt install nginx -y
-#RUN    apt install vim -y
-#RUN    apt inctall curl -y
+RUN apt update -y; \
+    apt upgrade -y; \
+    apt install nginx -y; \
+    chown -R www-data:www-data /var/www/html
 
-RUN  mkdir -p etc/nginx/ssl
-RUN  apt install openssl -y
-RUN  openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
-                              -keyout /etc/nginx/ssl/inception.key \
-                              -subj "/C=FR/L=Lyon/O=42/CN=hgeffroy.42.fr/UID=hgeffroy"
+COPY --chmod=755 conf/nginx.conf /etc/nginx/sites-available/nginx.conf
 
-RUN  mkdir -p /var/run/nginx
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 
-RUN chmod 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+EXPOSE 8000
 
-ENTRYPOINT  ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+# mkdir -p etc/nginx/ssl \
+# apt install openssl -y \
+# openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
+#                          -keyout /etc/nginx/ssl/inception.key \
+#                          -subj "/C=FR/L=Lyon/O=42/CN=hgeffroy.42.fr/UID=hgeffroy" \
+# mkdir -p /var/run/nginx

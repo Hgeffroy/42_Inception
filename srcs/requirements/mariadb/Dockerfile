@@ -1,0 +1,22 @@
+FROM debian:bookworm
+
+RUN apt update -y; \
+    apt upgrade -y; \
+    apt install mariadb-server -y
+
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY --chmod=755 tools/script.sh /home/
+
+EXPOSE 3306
+ARG MARIADB_ROOT_PASSWORD
+ARG MARIADB_USER
+ARG MARIADB_PASSWORD
+ARG MARIADB_DATABASE
+
+ENV MARIADB_ROOT_PASSWORD MARIADB_ROOT_PASSWORD
+ENV MARIADB_USER MARIADB_USER
+ENV MARIADB_PASSWORD MARIADB_PASSWORD
+ENV MARIADB_DATABASE MARIADB_DATABASE
+
+
+ENTRYPOINT ["home/script.sh"]
