@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:11
 
 RUN apt update -y; \
     apt upgrade -y; \
@@ -7,7 +7,6 @@ RUN apt update -y; \
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY --chmod=755 tools/script.sh /home/
 
-EXPOSE 3306
 ARG MARIADB_ROOT_PASSWORD
 ARG MARIADB_USER
 ARG MARIADB_PASSWORD
@@ -18,5 +17,6 @@ ENV MARIADB_USER MARIADB_USER
 ENV MARIADB_PASSWORD MARIADB_PASSWORD
 ENV MARIADB_DATABASE MARIADB_DATABASE
 
+EXPOSE 3306
 
 ENTRYPOINT ["home/script.sh"]

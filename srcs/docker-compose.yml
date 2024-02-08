@@ -50,6 +50,14 @@ services:
     build: 
       context: requirements/wordpress
       dockerfile: Dockerfile
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+        MARIADB_DATABASE: ${MARIADB_DATABASE}
+        MARIADB_USER: ${MARIADB_USER}
+        WP_USER: ${WP_USER}
+        WP_PASS: ${WP_PASS}
+        WP_MAIL: ${WP_MAIL}
     depends_on:
       - mariadb
     restart: unless-stopped
