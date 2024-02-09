@@ -11,10 +11,14 @@ RUN apt update -y; \
                             -subj "/C=FR/L=Lyon/O=42/CN=hgeffroy.42.fr/UID=hgeffroy"; \
     mkdir -p /var/run/nginx
 
-COPY --chmod=755 conf/nginx.conf /etc/nginx/sites-available/nginx.conf
+COPY --chmod=755 conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 
-EXPOSE 8000
+EXPOSE 443
+
+ARG DOMAIN_NAME
+
+ENV DOMAIN_NAME DOMAIN_NAME
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

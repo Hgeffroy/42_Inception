@@ -8,4 +8,4 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE}; \
           FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p$MARIADB_ROOT_PASSWORD shutdown
-mariadbd
+exec mysqld_safe

@@ -9,7 +9,7 @@ RUN wget https://github.com/wp-cli/wp-cli-bundle/releases/download/v2.7.0/wp-cli
     chmod +x wp-cli-2.7.0.phar && \
     mv wp-cli-2.7.0.phar /usr/local/bin/wp
 
-COPY conf/www.conf /etc/php/7.4/fpm/pool.d
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY --chmod=755 tools/script.sh /home/
 
 ARG MARIADB_PASSWORD
@@ -27,5 +27,7 @@ ENV MARIADB_USER MARIADB_USER
 ENV WP_USER WP_USER
 ENV WP_PASS WP_PASS
 ENV WP_MAIL WP_MAIL
+
+EXPOSE 9000
 
 ENTRYPOINT ["home/script.sh"]
