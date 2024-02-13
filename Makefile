@@ -22,7 +22,7 @@ clean:
 	docker rmi -f $$(docker images -qa);
 	docker system prune -a --force;
 	docker volume rm $$(docker volume ls -q);
+	rm -rf $(VOLUMES);
 	docker network rm $$(docker network ls -q);
-	rm -rf $(VOLUMES)
 
 .PHONY: re clean up down all
