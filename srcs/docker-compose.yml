@@ -39,8 +39,6 @@ services:
         MARIADB_DATABASE: $MARIADB_DATABASE
       dockerfile: Dockerfile
     restart: unless-stopped
-    expose:
-      - "3306"
   
   wordpress:
     container_name: wordpress
@@ -60,13 +58,14 @@ services:
         MARIADB_PASSWORD: $MARIADB_PASSWORD
         MARIADB_DATABASE: $MARIADB_DATABASE
         MARIADB_USER: $MARIADB_USER
+        WP_ADMIN: $WP_ADMIN
+        WP_ADMINPASS: $WP_ADMINPASS
+        WP_ADMINMAIL: $WP_ADMINMAIL
         WP_USER: $WP_USER
-        WP_PASS: $WP_PASS
-        WP_MAIL: $WP_MAIL
+        WP_USERPASS: $WP_USERPASS
+        WP_USERMAIL: $WP_USERMAIL
       dockerfile: Dockerfile
     restart: on-failure
-    expose:
-      - "9000"
 
 networks:
   inception:
