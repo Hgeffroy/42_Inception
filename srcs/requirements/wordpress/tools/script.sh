@@ -9,5 +9,6 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     wp user create $WP_USER $WP_USERMAIL --user_pass="$WP_USERPASS" --path=/var/www/html --allow-root;
 fi
 
+chmod 777 /var/www/html/wp-content
 mkdir -p /run/php/
 php-fpm7.4 -F

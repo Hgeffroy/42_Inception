@@ -18,11 +18,11 @@ down:
 re: down up
 
 clean:
-	docker stop $$(docker ps -qa);
-	docker rmi -f $$(docker images -qa);
-	docker system prune -a --force;
-	docker volume rm $$(docker volume ls -q);
-	rm -rf $(VOLUMES);
-	docker network rm $$(docker network ls -q);
+	- docker stop $$(docker ps -qa)
+	- docker rmi -f $$(docker images -qa)
+	- docker system prune -a --force
+	- docker volume rm $$(docker volume ls -q)
+	- rm -rf $(VOLUMES)
+	- docker network rm $$(docker network ls -q)
 
 .PHONY: re clean up down all
